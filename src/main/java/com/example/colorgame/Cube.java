@@ -11,17 +11,15 @@ import javafx.util.Duration;
 public class Cube extends Rectangle {
 
     public Cube(Pane rod, int x, int y, Color color) {
-
         super(x, y, 100, 100);
         rod.getChildren().add(this);
         this.setFill(color);
 
-
         this.setOnMouseClicked(mouseEvent -> scaleCube(this));
     }
 
-    // Metode til at skalere kuben (eller andre noder)
-    public void scaleCube(Node node) {
+    // Metode til at skalere kuben (eller andre noder) og returnere ScaleTransition
+    public ScaleTransition scaleCube(Node node) {
         ScaleTransition scaleTransition = new ScaleTransition();
         scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
         scaleTransition.setDuration(Duration.seconds(0.5));
@@ -30,6 +28,6 @@ public class Cube extends Rectangle {
         scaleTransition.setNode(node);
         scaleTransition.setByY(0.2);
         scaleTransition.setByX(0.2);
-        scaleTransition.play();
+        return scaleTransition; // Returner ScaleTransition i stedet for at starte den
     }
 }

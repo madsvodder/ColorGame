@@ -2,7 +2,6 @@ package com.example.colorgame;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,15 +38,7 @@ public class Order {
             int x = orderArray.get(i);
             Cube cube = cubesArray.get(x);
 
-            // Opret en ScaleTransition
-            ScaleTransition scaleTransition = new ScaleTransition();
-            scaleTransition.setDuration(Duration.seconds(0.5));
-            scaleTransition.setNode(cube);
-            scaleTransition.setByX(0.2);
-            scaleTransition.setByY(0.2);
-            scaleTransition.setAutoReverse(true);
-            scaleTransition.setCycleCount(2);
-
+            ScaleTransition scaleTransition = cube.scaleCube(cube); // Få ScaleTransition fra cube
             sequentialTransition.getChildren().add(scaleTransition); // Tilføj til den sekventielle overgang
         }
 
