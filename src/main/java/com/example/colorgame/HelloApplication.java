@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    Order order;
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -25,16 +28,23 @@ public class HelloApplication extends Application {
         Cube cube3 = new Cube(rod, 100, 250, Color.RED);
         Cube cube4 = new Cube(rod, 250, 250, Color.GREEN);
 
-        // Set up the order class with our pre-made cubes
-        Order order = new Order(cube1, cube2, cube3, cube4);
+        /*Create mouse events for pressing a cube. Mouse events are created in the main class, so it's easier to
+          do different methods in other classes.
+        */
+        cube1.setOnMouseClicked(mouseEvent -> cube1.scaleCube(cube1, true));
+        cube2.setOnMouseClicked(mouseEvent -> cube2.scaleCube(cube2, true));
+        cube3.setOnMouseClicked(mouseEvent -> cube3.scaleCube(cube3, true));
+        cube4.setOnMouseClicked(mouseEvent -> cube4.scaleCube(cube4, true));
 
-        // Testing for adding new cubes and playing the transitions
-        order.addNewCubeToOrder();
-        order.playAllCubes();
+        // Set up the order variable with our new cubes
+        order = new Order(cube1, cube2, cube3, cube4);
+    }
 
+    public void pressedCube() {
     }
 
     public static void main(String[] args) {
         launch();
+
     }
 }

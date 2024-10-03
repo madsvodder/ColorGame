@@ -15,7 +15,7 @@ public class Cube extends Rectangle {
         rod.getChildren().add(this);
         this.setFill(color);
 
-        this.setOnMouseClicked(mouseEvent -> scaleCube(this, true));
+        //this.setOnMouseClicked(mouseEvent -> scaleCube(this, true));
     }
 
     // Metode til at skalere kuben (eller andre noder) og returnere ScaleTransition
