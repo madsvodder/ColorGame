@@ -9,10 +9,10 @@ import java.util.Random;
 public class Order {
 
     // Create Array of Cube Order
-    ArrayList<Integer> orderArray = new ArrayList<>(); // Create an ArrayList object
+    ArrayList<Integer> orderArray = new ArrayList<>();
 
     // Create Array To Keep Track of Cubes
-    ArrayList<Cube> cubesArray = new ArrayList<>();  // Angiver, at det er en liste af Cube-objekter
+    ArrayList<Cube> cubesArray = new ArrayList<>();
 
     // create instance of Random class
     Random randomCube = new Random();
@@ -28,20 +28,27 @@ public class Order {
     public void addNewCubeToOrder() {
         int randomNumber = randomCube.nextInt(4);
         orderArray.add(randomNumber);
-        System.out.println("randomNumber: " + randomNumber);
+        int x = randomNumber+1;
+        System.out.println("Firkant Nummer: " + x);
     }
 
     public void playAllCubes() {
-        SequentialTransition sequentialTransition = new SequentialTransition(); // Opret en SequentialTransition
+
+        // Opret en SequentialTransition
+        SequentialTransition sequentialTransition = new SequentialTransition();
 
         for (int i = 0; i < orderArray.size(); i++) {
             int x = orderArray.get(i);
-            Cube cube = cubesArray.get(x);
+            Cube cubeToAnimate = cubesArray.get(x);
 
-            ScaleTransition scaleTransition = cube.scaleCube(cube); // Få ScaleTransition fra cube
-            sequentialTransition.getChildren().add(scaleTransition); // Tilføj til den sekventielle overgang
+            // Få ScaleTransition fra cube
+            ScaleTransition scaleTransition = cubeToAnimate.scaleCube(cubeToAnimate, false);
+
+            // Tilføj ScaleTransition fra cube til sequentialTransition
+            sequentialTransition.getChildren().add(scaleTransition);
         }
 
-        sequentialTransition.play(); // Start sekventiel overgang
+        // Start transition
+        sequentialTransition.play();
     }
 }
