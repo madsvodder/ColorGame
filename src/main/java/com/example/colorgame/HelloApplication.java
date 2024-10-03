@@ -1,16 +1,10 @@
 package com.example.colorgame;
 
-import javafx.animation.Interpolator;
-import javafx.animation.ScaleTransition;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -28,10 +22,21 @@ public class HelloApplication extends Application {
         Cube cube3 = new Cube(rod, 100, 250, Color.RED);
         Cube cube4 = new Cube(rod, 250, 250, Color.GREEN);
 
+        Order order = new Order(cube1, cube2, cube3, cube4);
+
+        order.addNewCubeToOrder();
+        order.addNewCubeToOrder();
+        order.addNewCubeToOrder();
+        order.addNewCubeToOrder();
+        order.addNewCubeToOrder();
+
+        order.playAllCubes();
+
         Scene scene = new Scene(rod, 500, 600);
         stage.setScene(scene);
         stage.setTitle("Klik Firkant");
         stage.show();
+
     }
 
     public static void main(String[] args) {
