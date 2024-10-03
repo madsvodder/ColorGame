@@ -1,5 +1,6 @@
 package com.example.colorgame;
 
+import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,41 +18,20 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Rectangle Cube1 = new Rectangle(100, 100, 100, 100);
-        Rectangle Cube2 = new Rectangle(250, 100, 100, 100);
-        Rectangle Cube3 = new Rectangle(100, 250, 100, 100);
-        Rectangle Cube4 = new Rectangle(250, 250, 100, 100);
-
-        Cube1.setFill(Color.BLUE);
-        Cube2.setFill(Color.INDIANRED);
-        Cube3.setFill(Color.YELLOW);
-        Cube4.setFill(Color.GREEN);
-
-        Cube1.setOnMouseClicked(event -> {scaleCube(Cube1);});
-        Cube2.setOnMouseClicked(event -> {scaleCube(Cube2);});
-        Cube3.setOnMouseClicked(event -> {scaleCube(Cube3);});
-        Cube4.setOnMouseClicked(event -> {scaleCube(Cube4);});
+        int x = 10;
+        int y = 10;
 
         Pane rod = new Pane();
-        rod.getChildren().addAll(Cube1, Cube2, Cube3, Cube4);
+
+        Cube cube1 = new Cube(rod, 100, 100, Color.BLACK);
+        Cube cube2 = new Cube(rod, 250, 100, Color.BLUE);
+        Cube cube3 = new Cube(rod, 100, 250, Color.RED);
+        Cube cube4 = new Cube(rod, 250, 250, Color.GREEN);
 
         Scene scene = new Scene(rod, 500, 600);
         stage.setScene(scene);
         stage.setTitle("Klik Firkant");
         stage.show();
-
-        //scaleCube(Cube2);
-    }
-
-    public void scaleCube(Node cube) {
-        ScaleTransition scaleTransition = new ScaleTransition();
-        scaleTransition.setDuration(Duration.seconds(0.5));
-        scaleTransition.setNode(cube);
-        scaleTransition.setByY(0.2);
-        scaleTransition.setByX(0.2);
-        scaleTransition.setAutoReverse(true);
-        scaleTransition.play();
-
     }
 
     public static void main(String[] args) {
