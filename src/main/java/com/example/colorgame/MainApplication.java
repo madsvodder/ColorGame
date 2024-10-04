@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainApplication extends Application {
-    
+
     // Cube Colors
     Color cubeRed = Color.web("EF476F");
     Color cubeBlue = Color.web("118AB2");

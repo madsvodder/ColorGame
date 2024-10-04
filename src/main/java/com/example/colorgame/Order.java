@@ -15,7 +15,7 @@ public class Order {
     // Create Array of Cube Order
     ArrayList<Integer> orderArray = new ArrayList<>();
 
-    // Create a temporary array, so its easy to keep track of which cubes have been pressed.
+    // Create a temporary array, so it's easy to keep track of which cubes have been pressed.
     ArrayList<Integer> tempOrderArray = new ArrayList<>();
 
     // Create Array To Keep Track of Cubes
