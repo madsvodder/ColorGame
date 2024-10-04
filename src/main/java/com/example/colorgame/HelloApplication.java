@@ -8,10 +8,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class HelloApplication extends Application {
 
     Order order;
+
+    boolean allCubesCorrect;
+
+    boolean readyToPlay = true;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -41,9 +48,6 @@ public class HelloApplication extends Application {
         order = new Order(cube1, cube2, cube3, cube4);
 
         order.addNewCubeToOrder();
-        order.addNewCubeToOrder();
-        order.addNewCubeToOrder();
-        order.addNewCubeToOrder();
         order.playAllCubes();
     }
 
@@ -53,14 +57,25 @@ public class HelloApplication extends Application {
         System.out.println("Cube Pressed:" + cubePressed.getCubeID(cubePressed));
         System.out.println("Last in Array: " + order.tempOrderArray.getLast());
 
+        // Make new scheduler to make a animation delay after you have pressed all the right cubes
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
         // Check if the correct cube is pressed
         if (cubePressed.getCubeID(cubePressed) == order.tempOrderArray.getFirst()) {
             System.out.println("Correct Cube Pressed");
             order.tempOrderArray.removeFirst();
+            if (order.tempOrderArray.size() == 0) {
+                allCubesCorrect = true;
+                order.addNewCubeToOrder();
+                order.resetTempOrder();
+
+                // When all methods are executed, wait 1 second and run the method "playAllCubes"
+                scheduler.schedule(() -> {
+                    order.playAllCubes();
+                }, 1, TimeUnit.SECONDS);
+            }
         }
-
     }
-
 
 public static void main(String[] args) {
     launch();

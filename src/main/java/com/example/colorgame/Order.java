@@ -3,10 +3,12 @@ package com.example.colorgame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Order {
+
 
     // Create Array of Cube Order
     ArrayList<Integer> orderArray = new ArrayList<>();
@@ -25,6 +27,11 @@ public class Order {
         cubesArray.add(cube2);
         cubesArray.add(cube3);
         cubesArray.add(cube4);
+    }
+
+    public void resetTempOrder() {
+        tempOrderArray.clear();
+        tempOrderArray.addAll(orderArray);
     }
 
     // Add a New Cube To The Order
@@ -52,7 +59,7 @@ public class Order {
             sequentialTransition.getChildren().add(scaleTransition);
         }
 
-        // Start transition
+        // Delay
         sequentialTransition.play();
     }
 }
