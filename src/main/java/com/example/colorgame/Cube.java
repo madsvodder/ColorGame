@@ -10,13 +10,15 @@ import javafx.util.Duration;
 
 public class Cube extends Rectangle {
 
+    // Variables
+    public int cubeID;
     public int initialWidth = 100;
     public int initialHeight = 175;
-    public int cubeID;
-    public boolean isTransitionPlaying = false;
-    private double maxCubeScale = 1.2;
 
+    // Constructor
     public Cube(Pane rod, int x, int y, Color color, int cubeID) {
+
+        // Set up the cube using the variables from the constructor
         super(x, y, 100, 175);
         this.setWidth(initialWidth);
         this.setHeight(initialHeight);
@@ -27,14 +29,14 @@ public class Cube extends Rectangle {
 
         // Add Cube To Scene
         rod.getChildren().add(this);
-        //this.setOnMouseClicked(mouseEvent -> scaleCube(this, true));
     }
 
+    // Get the ID of this cube
     public int getCubeID(Cube cubePressed) {
         return cubeID;
     }
 
-    // Metode til at skalere kuben (eller andre noder) og returnere ScaleTransition
+    // Method for scaling the cube and reversing to the original size
     public ScaleTransition scaleCube(Node node, boolean mouseEvent) {
         ScaleTransition scaleTransition = new ScaleTransition();
         scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
@@ -44,28 +46,19 @@ public class Cube extends Rectangle {
         scaleTransition.setAutoReverse(true);
         scaleTransition.setCycleCount(2);
         scaleTransition.setNode(node);
-        setIsTransitionPlaying(true);
-        if (mouseEvent == true) {
+        if (mouseEvent) {
             scaleTransition.play();
-            setIsTransitionPlaying(true);
         }
         return scaleTransition; // Returner ScaleTransition i stedet for at starte den
     }
 
-    public void setIsTransitionPlaying(boolean isTransitionPlaying) {
-        this.isTransitionPlaying = isTransitionPlaying;
-    }
-
-    public boolean getIsTransitionPlaying() {
-        return isTransitionPlaying;
-    }
-
+    // Enable being able to press the cubes with the mouse
     public void enablePress() {
         this.setDisable(false);
     }
 
+    // Disable being able to press the cubes with the mouse
     public void disablePress() {
         this.setDisable(true);
     }
-
 }

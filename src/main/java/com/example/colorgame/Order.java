@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Order {
 
+    // Create MainApplication variable so we have a reference to the MainApplication Class
     MainApplication mainApp;
 
     // Create Array of Cube Order
@@ -23,6 +24,7 @@ public class Order {
     // create instance of Random class
     Random randomCube = new Random();
 
+    // Constructor
     public Order(MainApplication mainApplication,Cube cube1, Cube cube2, Cube cube3, Cube cube4) {
         mainApp = mainApplication;
         cubesArray.add(cube1);
@@ -31,6 +33,7 @@ public class Order {
         cubesArray.add(cube4);
     }
 
+    // Reset the temporary order, so we can refill "tempOrderArray" with "orderArray"
     public void resetTempOrder() {
         tempOrderArray.clear();
         tempOrderArray.addAll(orderArray);
@@ -45,6 +48,7 @@ public class Order {
         //System.out.println("Firkant Nummer: " + x + "\2" + "Order: " + orderArray.get(0));
     }
 
+    // Play Animations For All Cubes In Order
     public void playAllCubes() {
 
         // Opret en SequentialTransition

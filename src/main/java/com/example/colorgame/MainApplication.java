@@ -12,19 +12,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainApplication extends Application {
-
-    Order order;
-
-    boolean allCubesCorrect;
-
-    // Background color
-    Color bgColor = Color.web("073b4c");
-
+    
     // Cube Colors
     Color cubeRed = Color.web("EF476F");
     Color cubeBlue = Color.web("118AB2");
     Color cubeGreen = Color.web("06D6A0");
     Color cubeYellow = Color.web("FFD166");
+
+    // Background color
+    Color bgColor = Color.web("073b4c");
 
     // Set up cube variables
     Cube cube1;
@@ -32,6 +28,13 @@ public class MainApplication extends Application {
     Cube cube3;
     Cube cube4;
 
+    // Set up Order Class Variable
+    Order order;
+
+    // Boolean for checking if you pressed all the correct cubes
+    boolean allCubesCorrect;
+
+    // Main Start
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -80,6 +83,7 @@ public class MainApplication extends Application {
         cube4.setDisable(false);
     }
 
+    // Method for what happens when pressing a cube
     public void pressedCube(Cube cubePressed) {
         cubePressed.scaleCube(cubePressed, true);
 
@@ -110,11 +114,13 @@ public class MainApplication extends Application {
         }
     }
 
+    // Method for losing the game
     public void lostGame() {
         allCubesCorrect = false;
         System.out.println("You Lost!");
     }
 
+    // Main
 public static void main(String[] args) {
     launch();
     }
