@@ -11,6 +11,9 @@ public class Order {
     // Create Array of Cube Order
     ArrayList<Integer> orderArray = new ArrayList<>();
 
+    // Create a temporary array, so its easy to keep track of which cubes have been pressed.
+    ArrayList<Integer> tempOrderArray = new ArrayList<>();
+
     // Create Array To Keep Track of Cubes
     ArrayList<Cube> cubesArray = new ArrayList<>();
 
@@ -28,8 +31,9 @@ public class Order {
     public void addNewCubeToOrder() {
         int randomNumber = randomCube.nextInt(4);
         orderArray.add(randomNumber);
-        int x = randomNumber+1;
-        System.out.println("Firkant Nummer: " + x);
+        tempOrderArray.add(randomNumber);
+        int x = randomNumber;
+        System.out.println("Firkant Nummer: " + x + "\2" + "Order: " + orderArray.get(0));
     }
 
     public void playAllCubes() {

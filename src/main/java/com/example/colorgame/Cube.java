@@ -10,12 +10,19 @@ import javafx.util.Duration;
 
 public class Cube extends Rectangle {
 
-    public Cube(Pane rod, int x, int y, Color color) {
+    public int cubeID;
+
+    public Cube(Pane rod, int x, int y, Color color, int cubeID) {
         super(x, y, 100, 100);
         rod.getChildren().add(this);
         this.setFill(color);
+        this.cubeID = cubeID;
 
         //this.setOnMouseClicked(mouseEvent -> scaleCube(this, true));
+    }
+
+    public int getCubeID(Cube cubePressed) {
+        return cubeID;
     }
 
     // Metode til at skalere kuben (eller andre noder) og returnere ScaleTransition
