@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Order {
 
+    MainApplication mainApp;
 
     // Create Array of Cube Order
     ArrayList<Integer> orderArray = new ArrayList<>();
@@ -22,7 +23,8 @@ public class Order {
     // create instance of Random class
     Random randomCube = new Random();
 
-    public Order(Cube cube1, Cube cube2, Cube cube3, Cube cube4) {
+    public Order(MainApplication mainApplication,Cube cube1, Cube cube2, Cube cube3, Cube cube4) {
+        mainApp = mainApplication;
         cubesArray.add(cube1);
         cubesArray.add(cube2);
         cubesArray.add(cube3);
@@ -40,7 +42,7 @@ public class Order {
         orderArray.add(randomNumber);
         tempOrderArray.add(randomNumber);
         int x = randomNumber;
-        System.out.println("Firkant Nummer: " + x + "\2" + "Order: " + orderArray.get(0));
+        //System.out.println("Firkant Nummer: " + x + "\2" + "Order: " + orderArray.get(0));
     }
 
     public void playAllCubes() {
@@ -59,7 +61,16 @@ public class Order {
             sequentialTransition.getChildren().add(scaleTransition);
         }
 
-        // Delay
+        // Play Animations For All Cubes In The Correct order
         sequentialTransition.play();
+
+        // Disable touching the cubes, while the order is being played
+        mainApp.disableAllCubes();
+
+        // Enable touching the cubes again, after the order is done playing
+        sequentialTransition.setOnFinished(event -> {
+            mainApp.enableAllCubes();
+            System.out.println("Finished");
+        });
     }
 }
