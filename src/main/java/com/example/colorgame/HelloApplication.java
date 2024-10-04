@@ -72,7 +72,7 @@ public class HelloApplication extends Application {
                 // When all methods are executed, wait 1 second and run the method "playAllCubes"
                 scheduler.schedule(() -> {
                     order.playAllCubes();
-                }, 1, TimeUnit.SECONDS);
+                }, 2, TimeUnit.SECONDS);
             }
         }
     }
