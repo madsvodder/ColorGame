@@ -17,17 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainApplication extends Application {
 
-    Scene sceneLost;
-
-    // Cube Colors
-    Color cubeRed = Color.web("EF476F");
-    Color cubeBlue = Color.web("118AB2");
-    Color cubeGreen = Color.web("06D6A0");
-    Color cubeYellow = Color.web("FFD166");
-
-    // Background color
-    Color bgColor = Color.web("073b4c");
-
     // Set up cube variables
     Cube cube1;
     Cube cube2;
@@ -41,16 +30,16 @@ public class MainApplication extends Application {
     boolean allCubesCorrect;
 
     // Start button
-    Button startButton;
+    Button startButton = new Button("Start");
 
     // Text for showing the players score
     PointCounter pointCounter;
 
-    // Lost Game Label
-    Label lostlabel;
-
     // Pane
     Pane rod;
+
+    // Colors
+    CustomColors customColors = new CustomColors();
 
     // Main Start
     @Override
@@ -60,30 +49,27 @@ public class MainApplication extends Application {
         rod = new Pane();
         Scene scene = new Scene(rod, 500, 600);
         stage.setTitle("Color Memory Game");
-        scene.setFill(bgColor);
+        scene.setFill(customColors.bgColor);
         stage.setScene(scene);
         stage.show();
 
         // Set up the start button
-        startButton = new Button("Start");
         startButton.setLayoutX(215);
         startButton.setLayoutY(525);
         rod.getChildren().add(startButton);
-        startButton.setOnAction(event -> {
-            order.addNewCubeToOrder();
-            order.playAllCubes();
-        });
+        startButton.setOnAction(event -> {startGame();});
 
         // Set up the point counter class
         pointCounter = new PointCounter(rod);
 
         // Setup 4 cubes
-        cube1 = new Cube(rod, 125, 100, cubeRed, 0);
-        cube2 = new Cube(rod, 250, 100, cubeYellow, 1);
-        cube3 = new Cube(rod, 125, 300, cubeGreen, 2);
-        cube4 = new Cube(rod, 250, 300, cubeBlue, 3);
+        cube1 = new Cube(rod, 125, 100, customColors.cubeRed, 0);
+        cube2 = new Cube(rod, 250, 100, customColors.cubeYellow, 1);
+        cube3 = new Cube(rod, 125, 300, customColors.cubeGreen, 2);
+        cube4 = new Cube(rod, 250, 300, customColors.cubeBlue, 3);
 
-        /*Create mouse events for pressing a cube. Mouse events are created in the main class, so it's easier to
+        /*
+        Create mouse events for pressing a cube. Mouse events are created in the main class, so it's easier to
           do different methods in other classes.
         */
         cube1.setOnMouseClicked(mouseEvent -> pressedCube(cube1));
@@ -93,6 +79,12 @@ public class MainApplication extends Application {
 
         // Set up the order variable with our new cubes
         order = new Order(this, cube1, cube2, cube3, cube4);
+    }
+
+    // Start Game
+    public void startGame() {
+        order.addNewCubeToOrder();
+        order.playAllCubes();
     }
 
     // Disable pressing the cubes
@@ -146,16 +138,12 @@ public class MainApplication extends Application {
     // Method for losing the game
     public void lostGame() {
         allCubesCorrect = false;
-        System.out.println("You Lost!");
         startButton.setText("Restart Game");
 
-        // Set up the lost game over label
-        Label lostLabel = new Label("You Lost!");
-        lostLabel.setLayoutX(115);
-        lostLabel.setLayoutY(270);
-        lostLabel.setFont(new Font("Arial", 48));
-        lostLabel.setText("Game Over!");
-        rod.getChildren().add(lostLabel);
+        // Reset game
+        order.orderArray.clear();
+        order.tempOrderArray.clear();
+        pointCounter.setPoints(0);
     }
 
     // Main

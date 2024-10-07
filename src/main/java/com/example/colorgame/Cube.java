@@ -48,9 +48,9 @@ public class Cube extends Rectangle {
         scaleTransition.setNode(node);
 
         if (mouseEvent) {
-            node.setDisable(true);
+            disablePress();
             scaleTransition.setOnFinished(event -> {
-                node.setDisable(false);
+                enablePress();
             });
             scaleTransition.play();
         }
