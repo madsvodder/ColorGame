@@ -2,10 +2,14 @@ package com.example.colorgame;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,6 +38,13 @@ public class MainApplication extends Application {
     // Boolean for checking if you pressed all the correct cubes
     boolean allCubesCorrect;
 
+    // Start button
+    Button startButton;
+
+    // Text for showing the players score
+    PointCounter pointCounter;
+
+
     // Main Start
     @Override
     public void start(Stage stage) throws IOException {
@@ -45,6 +56,19 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.setTitle("Color Memory Game");
         stage.show();
+
+        // Set up the start button
+        startButton = new Button("Start");
+        startButton.setLayoutX(215);
+        startButton.setLayoutY(525);
+        rod.getChildren().add(startButton);
+        startButton.setOnAction(event -> {
+            order.addNewCubeToOrder();
+            order.playAllCubes();
+        });
+
+        // Set up the point counter class
+        pointCounter = new PointCounter(rod);
 
         // Setup 4 cubes
         cube1 = new Cube(rod, 125, 100, cubeRed, 0);
@@ -62,9 +86,6 @@ public class MainApplication extends Application {
 
         // Set up the order variable with our new cubes
         order = new Order(this, cube1, cube2, cube3, cube4);
-
-        order.addNewCubeToOrder();
-        order.playAllCubes();
     }
 
     // Disable pressing the cubes
@@ -102,6 +123,7 @@ public class MainApplication extends Application {
                 cubePressed.disablePress();
                 order.addNewCubeToOrder();
                 order.resetTempOrder();
+                pointCounter.addPoint();
 
                 // When all methods are executed, wait 2 second and run the method "playAllCubes"
                 scheduler.schedule(() -> {
