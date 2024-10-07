@@ -43,7 +43,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(rod, 500, 600);
         scene.setFill(bgColor);
         stage.setScene(scene);
-        stage.setTitle("Klik Firkant");
+        stage.setTitle("Color Memory Game");
         stage.show();
 
         // Setup 4 cubes
