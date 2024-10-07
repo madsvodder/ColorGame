@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainApplication extends Application {
 
+    Scene sceneLost;
+
     // Cube Colors
     Color cubeRed = Color.web("EF476F");
     Color cubeBlue = Color.web("118AB2");
@@ -44,17 +46,22 @@ public class MainApplication extends Application {
     // Text for showing the players score
     PointCounter pointCounter;
 
+    // Lost Game Label
+    Label lostlabel;
+
+    // Pane
+    Pane rod;
 
     // Main Start
     @Override
     public void start(Stage stage) throws IOException {
 
         // Set up our scene
-        Pane rod = new Pane();
+        rod = new Pane();
         Scene scene = new Scene(rod, 500, 600);
+        stage.setTitle("Color Memory Game");
         scene.setFill(bgColor);
         stage.setScene(scene);
-        stage.setTitle("Color Memory Game");
         stage.show();
 
         // Set up the start button
@@ -111,7 +118,7 @@ public class MainApplication extends Application {
         //System.out.println("Cube Pressed:" + cubePressed.getCubeID(cubePressed));
         //System.out.println("Last in Array: " + order.tempOrderArray.getLast());
 
-        // Make new scheduler to make a animation delay after you have pressed all the right cubes
+        // Make new scheduler to make an animation delay after you have pressed all the right cubes
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         // Check if the correct cube is pressed
@@ -140,6 +147,15 @@ public class MainApplication extends Application {
     public void lostGame() {
         allCubesCorrect = false;
         System.out.println("You Lost!");
+        startButton.setText("Restart Game");
+
+        // Set up the lost game over label
+        Label lostLabel = new Label("You Lost!");
+        lostLabel.setLayoutX(115);
+        lostLabel.setLayoutY(270);
+        lostLabel.setFont(new Font("Arial", 48));
+        lostLabel.setText("Game Over!");
+        rod.getChildren().add(lostLabel);
     }
 
     // Main

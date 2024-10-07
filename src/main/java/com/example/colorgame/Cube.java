@@ -40,16 +40,21 @@ public class Cube extends Rectangle {
     public ScaleTransition scaleCube(Node node, boolean mouseEvent) {
         ScaleTransition scaleTransition = new ScaleTransition();
         scaleTransition.setInterpolator(Interpolator.EASE_BOTH);
-        scaleTransition.setDuration(Duration.seconds(0.5));
+        scaleTransition.setDuration(Duration.seconds(0.3));
         scaleTransition.setByY(0.2);
         scaleTransition.setByX(0.2);
         scaleTransition.setAutoReverse(true);
         scaleTransition.setCycleCount(2);
         scaleTransition.setNode(node);
+
         if (mouseEvent) {
+            node.setDisable(true);
+            scaleTransition.setOnFinished(event -> {
+                node.setDisable(false);
+            });
             scaleTransition.play();
         }
-        return scaleTransition; // Returner ScaleTransition i stedet for at starte den
+        return scaleTransition;
     }
 
     // Enable being able to press the cubes with the mouse
