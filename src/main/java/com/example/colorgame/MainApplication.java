@@ -84,14 +84,14 @@ public class MainApplication extends Application {
         // Set up the order variable with our new cubes
         order = new Order(this, cube1, cube2, cube3, cube4);
 
-        // Set up Game Over label (but don't show it yet)
+        // Set up Game Over label
         gameOverLabel = new Label("Game Over!");
         gameOverLabel.setFont(new Font("Arial", 48));
         gameOverLabel.setTextFill(Color.RED);
-        gameOverLabel.setLayoutX(100); // Centering manually
+        gameOverLabel.setLayoutX(100);
         gameOverLabel.setLayoutY(250);
         gameOverLabel.setTextAlignment(TextAlignment.CENTER);
-        gameOverLabel.setVisible(false);  // Hidden initially
+        gameOverLabel.setVisible(false);
         rod.getChildren().add(gameOverLabel);
     }
 
