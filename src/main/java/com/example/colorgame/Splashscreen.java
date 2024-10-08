@@ -21,7 +21,7 @@ public class Splashscreen extends MainApplication {
         Rectangle background = new Rectangle(500, 300, Color.GREEN);
 
         // Create a label for the title
-        Label title = new Label("ColorMemoryGame");
+        Label title = new Label("Color Memory Game");
         title.setTextFill(Color.GHOSTWHITE);
         title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 

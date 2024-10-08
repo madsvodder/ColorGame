@@ -1,10 +1,13 @@
 package com.example.colorgame;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -52,9 +55,10 @@ public class MainApplication extends Application {
 
         // Set up our scene
         rod = new Pane();
+        rod.setBackground(new Background(new BackgroundFill(customColors.bgColor, CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(rod, 500, 600);
         stage.setTitle("Color Memory Game");
-        scene.setFill(customColors.bgColor);
+        scene.setFill(Color.TRANSPARENT); // Hvis du ikke ønsker baggrundsfarve på scenen selv
         stage.setScene(scene);
         stage.show();
 
