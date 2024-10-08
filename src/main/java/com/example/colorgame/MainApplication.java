@@ -11,9 +11,11 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -47,7 +49,7 @@ public class MainApplication extends Application {
     CustomColors customColors = new CustomColors();
 
     // Label for Game Over message
-    Label gameOverLabel;
+    Text gameOverLabel;
 
     // Main Start
     @Override
@@ -90,11 +92,13 @@ public class MainApplication extends Application {
         order = new Order(this, cube1, cube2, cube3, cube4);
 
         // Set up Game Over label
-        gameOverLabel = new Label("Game Over!");
-        gameOverLabel.setFont(new Font("Arial", 48));
-        gameOverLabel.setTextFill(Color.RED);
-        gameOverLabel.setLayoutX(100);
-        gameOverLabel.setLayoutY(250);
+        gameOverLabel = new Text("GAME OVER!");
+        gameOverLabel.setFont(new Font("Arial", 56));
+        gameOverLabel.setFill(Color.WHITE);
+        gameOverLabel.setStroke(Color.BLACK);
+        gameOverLabel.setStrokeWidth(2.5);
+        gameOverLabel.setLayoutX(75);
+        gameOverLabel.setLayoutY(200);
         gameOverLabel.setTextAlignment(TextAlignment.CENTER);
         gameOverLabel.setVisible(false);
         rod.getChildren().add(gameOverLabel);
