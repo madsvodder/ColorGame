@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -40,6 +41,9 @@ public class MainApplication extends Application {
 
     // Colors
     CustomColors customColors = new CustomColors();
+
+    // Label for Game Over message
+    Label gameOverLabel;
 
     // Main Start
     @Override
@@ -79,12 +83,36 @@ public class MainApplication extends Application {
 
         // Set up the order variable with our new cubes
         order = new Order(this, cube1, cube2, cube3, cube4);
+
+        // Set up Game Over label (but don't show it yet)
+        gameOverLabel = new Label("Game Over!");
+        gameOverLabel.setFont(new Font("Arial", 48));
+        gameOverLabel.setTextFill(Color.RED);
+        gameOverLabel.setLayoutX(100); // Centering manually
+        gameOverLabel.setLayoutY(250);
+        gameOverLabel.setTextAlignment(TextAlignment.CENTER);
+        gameOverLabel.setVisible(false);  // Hidden initially
+        rod.getChildren().add(gameOverLabel);
     }
 
-    // Start Game
+    // Start game (or restart after game over)
     public void startGame() {
+        // Hide Game Over message if it's visible
+        gameOverLabel.setVisible(false);
+
+        // Reset cubes and points
+        cube1.setVisible(true);
+        cube2.setVisible(true);
+        cube3.setVisible(true);
+        cube4.setVisible(true);
+        pointCounter.setPoints(0);
+
+        // Start the game again
         order.addNewCubeToOrder();
         order.playAllCubes();
+
+        // Reset button text
+        startButton.setText("Start");
     }
 
     // Disable pressing the cubes
@@ -135,15 +163,27 @@ public class MainApplication extends Application {
         }
     }
 
-    // Method for losing the game
+    // Lost Game method
     public void lostGame() {
         allCubesCorrect = false;
-        startButton.setText("Restart Game");
 
-        // Reset game
+        // Show Game Over message
+        gameOverLabel.setVisible(true);
+
+        // Update start button text to "Restart Game"
+        startButton.setText("Restart Game");
+        startButton.setVisible(true);
+
+        // Hide cubes and reset game state
+        cube1.setVisible(false);
+        cube2.setVisible(false);
+        cube3.setVisible(false);
+        cube4.setVisible(false);
+        pointCounter.setPoints(0);
+
+        // Reset order arrays
         order.orderArray.clear();
         order.tempOrderArray.clear();
-        pointCounter.setPoints(0);
     }
 
     // Main
