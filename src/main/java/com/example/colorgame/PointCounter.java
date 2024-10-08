@@ -16,8 +16,8 @@ public class PointCounter extends Label {
         pointLabel.setLayoutX(215);
         pointLabel.setLayoutY(50);
         pointLabel.setFont(new Font("Arial", 20));
-        rod.getChildren().add(pointLabel);
         pointLabel.setText("Points: " + points);
+        rod.getChildren().add(pointLabel);
     }
 
     public void addPoint() {
@@ -28,5 +28,10 @@ public class PointCounter extends Label {
 
     public int getPoints() {
         return this.points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+        pointLabel.setText("Points: " + points);
     }
 }
