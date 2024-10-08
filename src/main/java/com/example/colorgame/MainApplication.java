@@ -135,9 +135,6 @@ public class MainApplication extends Application {
     public void pressedCube(Cube cubePressed) {
         cubePressed.scaleCube(cubePressed, true);
 
-        //System.out.println("Cube Pressed:" + cubePressed.getCubeID(cubePressed));
-        //System.out.println("Last in Array: " + order.tempOrderArray.getLast());
-
         // Make new scheduler to make an animation delay after you have pressed all the right cubes
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
