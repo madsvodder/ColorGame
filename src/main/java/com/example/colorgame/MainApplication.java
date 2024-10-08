@@ -97,6 +97,9 @@ public class MainApplication extends Application {
 
     // Start game (or restart after game over)
     public void startGame() {
+
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
         // Hide Game Over message if it's visible
         gameOverLabel.setVisible(false);
 
@@ -107,10 +110,12 @@ public class MainApplication extends Application {
         cube4.setVisible(true);
         pointCounter.setPoints(0);
 
-        // Start the game again
-        order.addNewCubeToOrder();
-        order.playAllCubes();
-
+        scheduler.schedule(() -> {
+            // Start the game again
+            order.addNewCubeToOrder();
+            order.playAllCubes();
+        }, 1, TimeUnit.SECONDS);
+        
         // Reset button text
         startButton.setText("Start");
     }
