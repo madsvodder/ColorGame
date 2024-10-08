@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -103,6 +104,9 @@ public class MainApplication extends Application {
         // Hide Game Over message if it's visible
         gameOverLabel.setVisible(false);
 
+        // Hide button
+        startButton.setVisible(false);
+
         // Reset cubes and points
         cube1.setVisible(true);
         cube2.setVisible(true);
@@ -147,7 +151,7 @@ public class MainApplication extends Application {
         if (cubePressed.getCubeID(cubePressed) == order.tempOrderArray.getFirst()) {
             //System.out.println("Correct Cube Pressed");
             order.tempOrderArray.removeFirst();
-            if (order.tempOrderArray.size() == 0) {
+            if (order.tempOrderArray.isEmpty()) {
                 allCubesCorrect = true;
                 cubePressed.disablePress();
                 order.addNewCubeToOrder();

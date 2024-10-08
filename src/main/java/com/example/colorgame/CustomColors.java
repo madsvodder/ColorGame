@@ -10,5 +10,5 @@ public class CustomColors {
     Color cubeYellow = Color.web("FFD166");
 
     // Background color
-    Color bgColor = Color.web("073b4c");
+    Color bgColor = Color.web("053B4D");
 }
