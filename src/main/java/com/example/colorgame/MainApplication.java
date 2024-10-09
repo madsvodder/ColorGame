@@ -89,7 +89,8 @@ public class MainApplication extends Application {
         cube4.setOnMouseClicked(mouseEvent -> pressedCube(cube4));
 
         // Set up the order variable with our new cubes
-        order = new Order(this, cube1, cube2, cube3, cube4);
+        Cube[] cubes = {cube1, cube2, cube3, cube4};
+        order = new Order(this, cubes);
 
         // Set up Game Over label
         gameOverLabel = new Text("GAME OVER!");

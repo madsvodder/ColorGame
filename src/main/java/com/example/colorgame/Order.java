@@ -25,12 +25,11 @@ public class Order {
     Random randomCube = new Random();
 
     // Constructor
-    public Order(MainApplication mainApplication,Cube cube1, Cube cube2, Cube cube3, Cube cube4) {
+    public Order(MainApplication mainApplication,Cube[] cubes) {
         mainApp = mainApplication;
-        cubesArray.add(cube1);
-        cubesArray.add(cube2);
-        cubesArray.add(cube3);
-        cubesArray.add(cube4);
+        for (Cube cube : cubes) {
+            cubesArray.add(cube);
+        }
     }
 
     // Reset the temporary order, so we can refill "tempOrderArray" with "orderArray"
@@ -44,25 +43,16 @@ public class Order {
         int randomNumber = randomCube.nextInt(4);
         orderArray.add(randomNumber);
         tempOrderArray.add(randomNumber);
-        int x = randomNumber;
-        //System.out.println("Firkant Nummer: " + x + "\2" + "Order: " + orderArray.get(0));
     }
 
     // Play Animations For All Cubes In Order
     public void playAllCubes() {
-
-        // Opret en SequentialTransition
         SequentialTransition sequentialTransition = new SequentialTransition();
 
-        for (int i = 0; i < orderArray.size(); i++) {
-            int x = orderArray.get(i);
+        for (int x : orderArray) {
             Cube cubeToAnimate = cubesArray.get(x);
-
-            // Få ScaleTransition fra cube
-            ScaleTransition scaleTransition = cubeToAnimate.scaleCube(cubeToAnimate, false);
-
             // Tilføj ScaleTransition fra cube til sequentialTransition
-            sequentialTransition.getChildren().add(scaleTransition);
+            sequentialTransition.getChildren().add(cubeToAnimate.scaleCube(cubeToAnimate, false));
         }
 
         // Play Animations For All Cubes In The Correct order
@@ -72,9 +62,6 @@ public class Order {
         mainApp.disableAllCubes();
 
         // Enable touching the cubes again, after the order is done playing
-        sequentialTransition.setOnFinished(event -> {
-            mainApp.enableAllCubes();
-            System.out.println("Finished");
-        });
+        sequentialTransition.setOnFinished(event -> mainApp.enableAllCubes());
     }
 }
