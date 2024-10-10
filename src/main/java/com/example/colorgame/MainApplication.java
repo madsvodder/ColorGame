@@ -194,7 +194,7 @@ public class MainApplication extends Application {
         cube2.setVisible(false);
         cube3.setVisible(false);
         cube4.setVisible(false);
-        pointCounter.setPoints(0);
+        //pointCounter.setPoints(0);
 
         // Reset order arrays
         order.orderArray.clear();
